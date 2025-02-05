@@ -7,7 +7,7 @@ const roboto = Roboto({
 });
 
 export const metadata = {
-  title: "Unit Store",
+  title: "Abdo Yasser",
   description: `Clothes e-commerce website for men , woman and kids,for all categories of clothes high quality
   and good prices; `,
 };
