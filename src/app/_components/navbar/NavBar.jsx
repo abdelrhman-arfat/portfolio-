@@ -44,7 +44,7 @@ const NavBar = () => {
         </Link>
       </div>
       {/* mobile menu */}
-      <div className="md:hidden flex">
+          <div className="md:hidden flex">
         {!isOpen ? (
           <TiThMenu
             id="menu"
@@ -57,11 +57,7 @@ const NavBar = () => {
             className={`text-3xl cursor-pointer text-rose-500 duration-700`}
           />
         )}
-        <NavBarMenu
-          className={`${isOpen ? "opacity-100" : "opacity-0"} duration-500`}
-          list={list}
-          setIsOpen={setIsOpen}
-        />
+        {isOpen && <NavBarMenu list={list} setIsOpen={setIsOpen} />}
       </div>
 
       {/* bigSizes menu */}
