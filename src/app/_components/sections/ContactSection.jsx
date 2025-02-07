@@ -33,7 +33,7 @@ const ContactSection = () => {
         }
       );
       gsap.fromTo(
-        "#header",
+        "#contact",
         {
           opacity: 0,
           y: 50,
@@ -57,7 +57,7 @@ const ContactSection = () => {
         <div className="w-full mt-96 py-8 sm:mt-0 sm:py-3">
 
       <h1
-        id="header"
+        id="contact"
         className=" opacity-0 text-center text-3xl md:text-4xl font-bold text-white"
       >
         Contact Me
