@@ -1,19 +1,29 @@
-import AboutSection from "./_components/sections/AboutSection";
-import ContactSection from "./_components/sections/ContactSection";
-import ExperienceSection from "./_components/sections/ExperienceSection";
+"use client";
+
+import { useContext } from "react";
+import { ThemContext } from "./_components/context/Context";
 import HeroSection from "./_components/sections/HeroSection";
-import ProjectSection from "./_components/sections/ProjectSection";
-import TechIcons from "./_components/sections/TechIcons";
+import TechIconsSection from "./_components/sections/TechIconsSection";
+import AboutSection from "./_components/sections/AboutSection";
+import ProjectSection from "./_components/sections/ProjectsSection";
+import ContactSection from "./_components/sections/ContactSection";
 
 export default function Home() {
+  const Them = useContext(ThemContext);
+  if (!Them) return;
+  const { them } = Them;
+
   return (
-    <div id="home " className="h-full w-full ">
+    <div id="home" className={`${them} min-h-[130vh] w-full px-5 `}>
       <HeroSection />
+      <div>
+        <TechIconsSection them={them} />
+      </div>
+      <hr className="my-10 max-w-[1000px] mx-auto" />
       <ProjectSection />
-      <TechIcons />
-      <ExperienceSection />
-      <AboutSection />
-      <ContactSection />
+      <AboutSection them={them} />
+
+      <ContactSection them={them} />
     </div>
   );
 }

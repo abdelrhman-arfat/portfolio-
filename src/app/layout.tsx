@@ -1,8 +1,9 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import NavBar from "./_components/navbar/NavBar";
 import { Metadata } from "next";
 import { ReactNode } from "react";
+import Context from "./_components/context/Context";
+import Navbar from "./_components/navbar/Navbar";
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
@@ -18,9 +19,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} $ bg-[#0C0C0C] w-screen overflow-x-hidden  antialiased`}>
-        <NavBar />
-        <main className="h-screen w-full">{children}</main>
+      <body
+        className={`${roboto.variable} w-screen overflow-x-hidden antialiased`}
+      >
+        <Context>
+          <Navbar />
+          <main className="h-screen w-full">{children}</main>
+        </Context>
       </body>
     </html>
   );
