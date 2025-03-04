@@ -1,25 +1,20 @@
 "use client";
-import { FaInstagramSquare } from "react-icons/fa";
-import { FaBehanceSquare } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import { FaWhatsappSquare } from "react-icons/fa";
+import { FaInstagramSquare, FaBehanceSquare, FaLinkedin, FaWhatsappSquare } from "react-icons/fa";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TThem } from "../context/Context";
 gsap.registerPlugin(ScrollTrigger);
 
-const ContactSection = () => {
-  const contentRef = useRef<HTMLInputElement>(null);
+const ContactSection = ({ them }: { them: TThem }) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
   useGSAP(() => {
     if (contentRef.current) {
-      const children = Array.from(contentRef.current.children);
       gsap.fromTo(
-        children,
-        {
-          opacity: 0,
-          y: 50,
-        },
+        contentRef.current.children,
+        { opacity: 0, y: 50 },
         {
           duration: 1,
           y: 0,
@@ -34,14 +29,10 @@ const ContactSection = () => {
       );
       gsap.fromTo(
         "#contact",
-        {
-          opacity: 0,
-          y: 50,
-        },
+        { opacity: 0, y: 50 },
         {
           duration: 1,
           y: 0,
-          stagger: 0.2,
           opacity: 1,
           scrollTrigger: {
             trigger: contentRef.current,
@@ -53,46 +44,51 @@ const ContactSection = () => {
     }
   }, []);
 
+  const links = [
+    {
+      icon: <FaInstagramSquare className="text-5xl transition-colors duration-300 group-hover:text-pink-500" />,
+      href: "https://www.instagram.com/abdo_yas.ser/",
+      hoverColor: "hover:border-pink-500",
+    },
+    {
+      icon: <FaBehanceSquare className="text-5xl transition-colors duration-300 group-hover:text-blue-500" />,
+      href: "https://www.behance.net/anaarfat",
+      hoverColor: "hover:border-blue-500",
+    },
+    {
+      icon: <FaLinkedin className="text-5xl transition-colors duration-300 group-hover:text-blue-700" />,
+      href: "https://www.linkedin.com/in/abdo-yasser-946493221",
+      hoverColor: "hover:border-blue-700",
+    },
+    {
+      icon: <FaWhatsappSquare className="text-5xl transition-colors duration-300 group-hover:text-green-500" />,
+      href: "https://wa.me/201014016899",
+      hoverColor: "hover:border-green-500",
+    },
+  ];
+
   return (
     <div className="w-full mt-96 py-8 sm:mt-0 sm:py-3">
-      <h1
-        id="contact"
-        className=" opacity-0 text-center text-3xl md:text-4xl font-bold text-white"
-      >
+      <h1 id="contact" className={`opacity-0 text-center text-3xl md:text-4xl font-bold ${them}`}>
         Contact Me
       </h1>
       <div
         ref={contentRef}
-        className="w-[90%] xl:w-[80vw] mx-auto py-10 px-4 flex justify-center gap-1 md:gap-5 h-[200px] "
+        className="w-[90%] xl:w-[80vw] mx-auto py-10 px-4 flex flex-wrap justify-center gap-4 md:gap-6"
       >
-        <a
-          className="opacity-0 duration-500 flex-1 flex items-center justify-center w-[100px] h-[100px]  cursor-pointer hover:text-rose-500 text-white bg-neutral-900 rounded-md"
-          href="https://www.instagram.com/abdo_yas.ser/"
-          target="_blank"
-        >
-          <FaInstagramSquare className=" text-3xl" />
-        </a>
-        <a
-          className="opacity-0 duration-500 flex-1  flex items-center justify-center w-[100px] h-[100px]  cursor-pointer hover:text-blue-500 text-white bg-neutral-900 rounded-md"
-          href="https://www.behance.net/anaarfat"
-          target="_blank"
-        >
-          <FaBehanceSquare className=" text-3xl" />
-        </a>
-        <a
-          className="opacity-0 duration-500 flex-1  flex items-center justify-center w-[100px] h-[100px]  cursor-pointer hover:text-blue-500 text-white bg-neutral-900 rounded-md"
-          href="https://www.linkedin.com/in/abdo-yasser-946493221"
-          target="_blank"
-        >
-          <FaLinkedin className=" text-3xl" />
-        </a>
-        <a
-          className="opacity-0 duration-500 flex-1  flex items-center justify-center w-[100px] h-[100px]  cursor-pointer hover:text-green-500 text-white bg-neutral-900 rounded-md"
-          href="https://wa.me/201014016899"
-          target="_blank"
-        >
-          <FaWhatsappSquare className=" text-3xl" />
-        </a>
+        {links.map(({ icon, href, hoverColor }, index) => (
+          <a
+            key={index}
+            className={`opacity-0 flex items-center justify-center w-[90px] h-[90px] md:w-[100px] md:h-[100px] rounded-md transition-all duration-300 transform hover:scale-110 group border-2 
+              ${hoverColor} 
+              ${them === "light" ? "bg-neutral-100 text-neutral-900 border-neutral-300" : "bg-neutral-600 text-white border-neutral-500"}`}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {icon}
+          </a>
+        ))}
       </div>
     </div>
   );

@@ -3,12 +3,13 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { Draggable } from "gsap/Draggable";
+import { ThemContext, TThem } from "../context/Context";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(Draggable);
-const TechIcons = () => {
+const TechIconsSection = ({ them }: { them: TThem }) => {
   const namse = [
     "js",
     "ts",
@@ -46,22 +47,31 @@ const TechIcons = () => {
       );
     }
   }, []);
+
   return (
-    <div
-      ref={mainRef}
-      className="w-[90%] grid grid-cols-3 sm:grid-cols-5 gap-2 md:gap-6 md:grid-cols-8 xl:w-[80vw] mx-auto my-10 px-10 "
-    >
-      {namse.map((name, index) => (
-        <div
-          id="draggable-icon"
-          className="bg-neutral-800 p-3 duration-200 w-[80px] h-[80px] flex items-center justify-center rounded-md"
-          key={index}
-        >
-          <Image src={`/${name}.svg`} alt="icon" width={50} height={50}></Image>
-        </div>
-      ))}
+    <div ref={mainRef} className="w-[90%] mx-auto">
+      <h1 className="px-8 text-3xl">Tech Stack:</h1>
+
+      <div className="overflow-x-auto flex gap-14 w-full py-5 px-8">
+        {namse.map((name, index) => (
+          <div
+            id="draggable-icon"
+            className={`my-card ${
+              them === "dark" ? "bg-neutral-800" : "bg-neutral-200"
+            }  p-3 duration-200 min-w-[80px] min-h-[80px] flex items-center justify-center rounded-md`}
+            key={index}
+          >
+            <Image
+              src={`/${name}.svg`}
+              alt="icon"
+              width={50}
+              height={50}
+            ></Image>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default TechIcons;
+export default TechIconsSection;

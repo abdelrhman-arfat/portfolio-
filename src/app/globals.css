@@ -2,3 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  scroll-behavior: smooth;
+}
+.scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: rgba(100, 100, 100, 0.1); /* Neutral gray */
+  border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.5); /* Medium gray */
+  border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.7); /* Slightly brighter on hover */
+}
+
+/* Firefox Support */
+.scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120, 120, 120, 0.5) rgba(100, 100, 100, 0.1);
+}
+
+.dark {
+  @apply bg-neutral-900 text-white;
+}
+.light {
+  @apply bg-[#fff] text-black;
+}
