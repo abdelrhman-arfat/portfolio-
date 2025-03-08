@@ -65,7 +65,7 @@ const ProjectSection = () => {
             title="E-commerce"
           />
         </Link>
-        <Link href="weather-app-rose-one-20.vercel.app">
+        <Link href="https://weather-app-rose-one-20.vercel.app">
           <ProjectsCard
             desc="Weather app with chose your town if you form egypt or write you town from weather api"
             title="Weather app"
