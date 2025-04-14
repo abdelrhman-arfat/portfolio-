@@ -30,9 +30,28 @@
   scrollbar-color: rgba(120, 120, 120, 0.5) rgba(100, 100, 100, 0.1);
 }
 
+/* Theme transitions */
+* {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
 .dark {
   @apply bg-neutral-900 text-white;
 }
+
 .light {
-  @apply bg-[#fff] text-black;
+  @apply bg-white text-neutral-900;
+}
+
+/* Dark mode specific styles */
+.dark .glow-text {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Light mode specific styles */
+.light .glow-text {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

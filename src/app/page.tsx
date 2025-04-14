@@ -14,15 +14,12 @@ export default function Home() {
   const { them } = Them;
 
   return (
-    <div id="home" className={`${them} min-h-[130vh] w-full px-5 `}>
-      <HeroSection />
-      <div>
-        <TechIconsSection them={them} />
-      </div>
+    <div id="home" className={`${them} min-h-[120vh] w-full px-5 `}>
+      <HeroSection them={them} />
+      <TechIconsSection them={them} />
       <hr className="my-10 max-w-[1000px] mx-auto" />
-      <ProjectSection />
+      <ProjectSection them={them} />
       <AboutSection them={them} />
-
       <ContactSection them={them} />
     </div>
   );

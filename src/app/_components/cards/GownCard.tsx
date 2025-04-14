@@ -9,7 +9,7 @@ const GownCard = () => {
         <div className="card">
           <div className="ray" />
           <div className="text">JR</div>
-          <div>Front-end Developer</div>
+          <div>Mern Stack Developer</div>
           <div className="line topl" />
           <div className="line leftl" />
           <div className="line bottoml" />

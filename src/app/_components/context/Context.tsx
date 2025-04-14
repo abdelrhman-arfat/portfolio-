@@ -10,7 +10,7 @@ export interface IThemContext {
 
 export const ThemContext = createContext<IThemContext | null>(null);
 const Context = ({ children }: { children: React.ReactNode }) => {
-  const [them, setThem] = useState<TThem>("light");
+  const [them, setThem] = useState<TThem>("dark");
 
   return (
     <ThemContext.Provider value={{ them, setThem }}>
