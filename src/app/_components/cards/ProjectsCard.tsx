@@ -86,7 +86,7 @@ const ProjectsCard = ({ title, desc, link, them }: ProjectsCardProps) => {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div className="fixed  inset-0 z-50 flex items-center justify-center bg-black/50">
           <div
             className={`relative w-full max-w-2xl rounded-xl p-8 shadow-2xl ${
               isDark ? "bg-gray-800" : "bg-white"
@@ -125,7 +125,7 @@ const ProjectsCard = ({ title, desc, link, them }: ProjectsCardProps) => {
                 {title}
               </h2>
 
-              <div className="prose dark:prose-invert">
+              <div className="prose dark:prose-invert max-h-[500px] overflow-y-scroll sm:h-fit ">
                 <p className={isDark ? "text-gray-300" : "text-gray-600"}>
                   {desc}
                 </p>

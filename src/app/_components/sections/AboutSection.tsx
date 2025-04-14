@@ -104,7 +104,7 @@ const AboutSection = ({ them }: { them: TThem }) => {
     <div
       id="about"
       ref={aboutRef}
-      className={`min-h-screen rounded-3xl  py-24 px-4 md:px-10 flex flex-col gap-16 md:w-[90%] mx-auto relative overflow-hidden  ${
+      className={`min-h-screen rounded-3xl  py-24 sm:px-4 md:px-10 flex flex-col gap-16 md:w-[90%] mx-auto relative overflow-hidden  ${
         them === "dark" ? "text-white" : "text-black"
       }`}
     >
@@ -129,9 +129,9 @@ const AboutSection = ({ them }: { them: TThem }) => {
           them === "dark"
             ? "bg-neutral-800/30 backdrop-blur-md border-neutral-700/50 shadow-[0_0_30px_rgba(120,119,198,0.2)]"
             : "bg-neutral-100/50 backdrop-blur-sm border-neutral-200 shadow-[0_0_30px_rgba(59,130,246,0.1)]"
-        } p-10 rounded-3xl border relative z-10 transform transition-all duration-300 hover:scale-[1.02]`}
+        } p-3 sm:p-10 rounded-3xl border relative z-10 transform transition-all duration-300 hover:scale-[1.02]`}
       >
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <p className="text-xl leading-9 tracking-wide mb-8">
             My name is AbdalRhman Yasser. I am 18 years old from Tanta, Egypt. I
             am a junior MERN Stack developer with a strong passion for backend
@@ -139,7 +139,7 @@ const AboutSection = ({ them }: { them: TThem }) => {
           </p>
           <div className="space-y-8">
             <div
-              className={`p-6 rounded-2xl ${
+              className={`p-2 sm:p-6 rounded-2xl ${
                 them === "dark"
                   ? "bg-gradient-to-r from-blue-500/10 to-purple-500/10 shadow-[0_0_20px_rgba(120,119,198,0.1)]"
                   : "bg-gradient-to-r from-blue-500/5 to-purple-500/5 shadow-[0_0_20px_rgba(59,130,246,0.05)]"

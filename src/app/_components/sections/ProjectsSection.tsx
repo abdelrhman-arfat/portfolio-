@@ -98,7 +98,7 @@ Internal backend APIs for data fetching and dynamic updates.
   {
     link: "https://gaming-website-one.vercel.app",
     title: "Gaming Website",
-    desc: "Gaming website with api integration for some games and filtering with platforms",
+    desc: "Gaming website with api integration for some games and filtering with platforms build with react and tailwind for styling and redux for state management ",
   },
   {
     link: "http://mwaket.vercel.app",
@@ -223,7 +223,7 @@ const ProjectSection = ({ them }: { them: TThem }) => {
         <div className="relative">
           <button
             onClick={() => scrollToProject("prev")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
+            className="absolute hidden sm:block left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
             aria-label="Previous project"
           >
             <svg
@@ -245,7 +245,10 @@ const ProjectSection = ({ them }: { them: TThem }) => {
             ref={containerRef}
             className="relative overflow-x-auto scrollbar-hide"
           >
-            <div ref={mainRef} className="flex gap-8 w-max px-12">
+            <div
+              ref={mainRef}
+              className="flex py-3 min-h-[500px] gap-8 w-max px-12"
+            >
               {projects.map((project, index) => (
                 <ProjectsCard
                   them={them}
@@ -259,7 +262,7 @@ const ProjectSection = ({ them }: { them: TThem }) => {
           </div>
           <button
             onClick={() => scrollToProject("next")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
+            className="absolute  hidden sm:block right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
             aria-label="Next project"
           >
             <svg
