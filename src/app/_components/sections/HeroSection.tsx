@@ -128,10 +128,10 @@ const HeroSection = ({ them }: { them: TThem }) => {
           <p
             className={`text-lg leading-relaxed ${them === "dark" && "text-gray-300"}`}
           >
-            I am AbdelRhman Yasser, an 18-year-old student at Tanta University's
-            Faculty of Computer Information. As a Junior Mern Stack Developer, I
-            combine technical skills with creative problem-solving to build
-            engaging digital experiences.
+            I am AbdelRhman Yasser, an 18-year-old student at Tanta University
+            in the Faculty of Computer Information. As a Junior Mern Stack
+            Developer, I combine technical skills with creative problem-solving
+            to build engaging digital experiences.
           </p>
           <div className="mt-4 ml-3">
             <Link

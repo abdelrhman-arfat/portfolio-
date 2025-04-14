@@ -1,6 +1,6 @@
 "use client";
 import { FaGithub, FaDownload } from "react-icons/fa";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import { ThemContext } from "../context/Context";
 import Switch from "../toggles/Switch";
@@ -12,28 +12,21 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ className = "" }) => {
-  const themeContext = useContext(ThemContext);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  if (!themeContext) {
-    console.error("Theme context is not available");
-    return null;
+  const context = useContext(ThemContext);
+  if (!context) {
+    throw new Error("ThemContext must be used within a ThemContext.Provider");
   }
+  const { them, setThem } = context;
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  const { them, setThem } = themeContext;
-
-  const handleDownload = () => {
-    // Replace with your actual CV file path
-    const cvUrl = "/cv.pdf";
-    const link = document.createElement("a");
-    link.href = cvUrl;
-    link.download = "Abdo_Yasser_CV.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useGSAP(() => {
+    if (!isClient) return;
+
     // Handle scroll
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -96,11 +89,21 @@ const Navbar: React.FC<NavbarProps> = ({ className = "" }) => {
         "-=0.3"
       );
 
-    // Cleanup
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [them]);
+  }, [them, isClient]);
+
+  const handleDownload = () => {
+    // Replace with your actual CV file path
+    const cvUrl = "/cv.pdf";
+    const link = document.createElement("a");
+    link.href = cvUrl;
+    link.download = "Abdo_Yasser_CV.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <header
