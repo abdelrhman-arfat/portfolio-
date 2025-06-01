@@ -5,73 +5,65 @@ import {
   FaLinkedin,
   FaWhatsappSquare,
 } from "react-icons/fa";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import { motion } from "framer-motion";
 import { useRef } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TThem } from "../context/Context";
-gsap.registerPlugin(ScrollTrigger);
 
 const ContactSection = ({ them }: { them: TThem }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    if (contentRef.current) {
-      // Enhanced animation for the title
-      gsap.fromTo(
-        "#contact",
-        {
-          opacity: 0,
-          y: 100,
-          scale: 0.9,
-          filter: "blur(5px)",
-        },
-        {
-          duration: 1.5,
-          y: 0,
-          scale: 1,
-          opacity: 1,
-          filter: "blur(0px)",
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+  const titleVariants = {
+    hidden: {
+      opacity: 0,
+      y: 100,
+      scale: 0.9,
+      filter: "blur(5px)",
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
 
-      // Enhanced animation for the social links
-      gsap.fromTo(
-        contentRef.current.children,
-        {
-          opacity: 0,
-          y: 100,
-          scale: 0.8,
-          rotation: -15,
-          filter: "blur(5px)",
-        },
-        {
-          duration: 1.2,
-          y: 0,
-          scale: 1,
-          rotation: 0,
-          filter: "blur(0px)",
-          stagger: {
-            amount: 0.8,
-            from: "center",
-          },
-          opacity: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-  }, []);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 50,
+      scale: 0.8,
+      rotate: -5,
+      filter: "blur(3px)",
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotate: 0,
+      filter: "blur(0px)",
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+        duration: 0.5,
+      },
+    },
+  };
 
   const links = [
     {
@@ -109,21 +101,29 @@ const ContactSection = ({ them }: { them: TThem }) => {
   ];
 
   return (
-    <div className="w-full max-h-[300px]  overflow-y-hidden mt-96 py-8 sm:mt-0 sm:py-3">
-      <h1
+    <div className="w-full max-h-[300px] overflow-y-hidden mt-96 py-8 sm:mt-0 sm:py-3">
+      <motion.h1
         id="contact"
-        className={`opacity-0 text-center text-3xl md:text-4xl font-bold ${them}`}
+        className={`text-center text-3xl md:text-4xl font-bold ${them}`}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={titleVariants}
       >
         Contact Me
-      </h1>
-      <div
+      </motion.h1>
+      <motion.div
         ref={contentRef}
         className="w-[90%] xl:w-[80vw] mx-auto py-10 px-4 flex flex-wrap justify-center gap-4 md:gap-6"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
       >
         {links.map(({ icon, href, hoverColor, glowColor }, index) => (
-          <a
+          <motion.a
             key={index}
-            className={`opacity-0 flex items-center justify-center w-[90px] h-[90px] md:w-[100px] md:h-[100px] rounded-md transition-all duration-500 transform hover:scale-110 group border-2 
+            className={`flex items-center justify-center w-[90px] h-[90px] md:w-[100px] md:h-[100px] rounded-md transition-all duration-300 transform group border-2 
               ${hoverColor} 
               ${glowColor}
               ${
@@ -134,11 +134,17 @@ const ContactSection = ({ them }: { them: TThem }) => {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
+            variants={itemVariants}
+            whileHover={{ 
+              scale: 1.1,
+              transition: { duration: 0.2 }
+            }}
+            whileTap={{ scale: 0.95 }}
           >
             {icon}
-          </a>
+          </motion.a>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

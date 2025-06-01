@@ -1,175 +1,143 @@
 "use client";
 import Image from "next/image";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
-import { ThemContext, TThem } from "../context/Context";
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion, useAnimation, useInView } from "framer-motion";
+import { useRef, useEffect } from "react";
+import { TThem } from "../context/Context";
 
 const TechIconsSection = ({ them }: { them: TThem }) => {
   const technologies = [
     "js",
+    "nodejs",
     "ts",
     "react",
     "next",
     "redux",
     "tailwind",
-    "GSAP",
+    "shadcn",
     "express",
     "mongodb",
+    "Oauth",
     "mysql",
+    "prisma",
+    "stripe",
+    "nest",
     "java",
     "springboot",
   ];
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: false, amount: 0.3 });
+  const controls = useAnimation();
 
-  useGSAP(() => {
-    if (containerRef.current && sliderRef.current) {
-      // Enhanced animation for the heading
-      const headingTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      });
+  // Animation variants
+  const headingVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
 
-      headingTimeline
-        .fromTo(
-          "h1",
-          {
-            opacity: 0,
-            y: 30,
-            scale: 0.8,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: "back.out(1.7)",
-          }
-        )
-        .fromTo(
-          "h1",
-          {
-            textShadow: "0 0 0px rgba(0,0,0,0)",
-          },
-          {
-            textShadow:
-              them === "dark"
-                ? "0 0 10px rgba(255,255,255,0.3)"
-                : "0 0 10px rgba(0,0,0,0.2)",
-            duration: 0.5,
-            delay: 0.2,
-          },
-          "<"
-        );
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.2,
+      },
+    },
+  };
 
-      // Initial animation for icons
-      const icons = Array.from(sliderRef.current.children) as HTMLElement[];
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+      },
+    },
+  };
 
-      gsap.fromTo(
-        icons,
-        {
-          opacity: 0,
-          scale: 0.8,
-          y: 20,
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 0.9,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 87%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-
-      // Auto-scroll animation
-      const sliderWidth = sliderRef.current.scrollWidth;
-      const containerWidth = containerRef.current.offsetWidth;
-      const duration = 20; // seconds for one complete scroll
-
-      gsap.to(sliderRef.current, {
-        x: -(sliderWidth - containerWidth),
-        duration: duration,
-        ease: "none",
-        repeat: -1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 87%",
-          end: "bottom 20%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      // Hover pause effect
-      containerRef.current.addEventListener("mouseenter", () => {
-        gsap.to(sliderRef.current, { timeScale: 0 });
-      });
-
-      containerRef.current.addEventListener("mouseleave", () => {
-        gsap.to(sliderRef.current, { timeScale: 1 });
-      });
+  // Infinite scroll animation
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
     }
-  }, []);
+  }, [controls, isInView]);
 
   return (
-    <div className="w-full py-12  overflow-hidden">
-      <div className="w-[90%] mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center">Tech Stack</h1>
+    <div className="w-full py-16 overflow-hidden relative">
+      {/* Background effects */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-3xl" />
+      </div>
 
-        <div ref={containerRef} className="relative w-full overflow-hidden">
-          <div ref={sliderRef} className="flex gap-8 w-max">
-            {technologies.map((name, index) => (
-              <div
+      <div className="w-[90%] max-w-7xl mx-auto relative z-10">
+        <motion.h1
+          className="section-title"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={headingVariants}
+        >
+          Tech Stack
+        </motion.h1>
+
+        <motion.div
+          ref={containerRef}
+          className="relative w-full overflow-hidden py-8"
+          initial="hidden"
+          animate={controls}
+          variants={containerVariants}
+        >
+          <motion.div
+            className="flex gap-8 w-max"
+            animate={{
+              x: ["-10%", "-60%"],
+              transition: {
+                x: {
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  duration: 20,
+                  ease: "linear",
+                },
+              },
+            }}
+          >
+            {[...technologies, ...technologies].map((name, index) => (
+              <motion.div
                 key={index}
-                className={`group flex-shrink-0 w-24 h-24 flex items-center justify-center rounded-xl ${
-                  them === "dark"
-                    ? "bg-neutral-800 hover:bg-neutral-700"
-                    : "bg-neutral-100 hover:bg-neutral-200"
-                } transition-all duration-300 shadow-lg hover:shadow-xl`}
+                className={`group flex-shrink-0 w-28 h-28 flex items-center justify-center rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl ${them === "dark" ? "bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)]" : "bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)]"}`}
+                variants={itemVariants}
+                whileHover={{
+                  scale: 1.1,
+                  rotate: 5,
+                  boxShadow: `0 10px 25px ${them === "dark" ? "rgba(79, 70, 229, 0.2)" : "rgba(99, 102, 241, 0.15)"}`,
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{ scale: 0.95 }}
               >
                 <Image
                   src={`/${name}.svg`}
                   alt={`${name} icon`}
-                  width={50}
-                  height={50}
+                  width={60}
+                  height={60}
                   className="transition-transform duration-300 group-hover:scale-110"
                 />
-              </div>
+              </motion.div>
             ))}
-            {/* Duplicate items for infinite scroll effect */}
-            {technologies.map((name, index) => (
-              <div
-                key={`duplicate-${index}`}
-                className={`group flex-shrink-0 w-24 h-24 flex items-center justify-center rounded-xl ${
-                  them === "dark"
-                    ? "bg-neutral-800 hover:bg-neutral-700"
-                    : "bg-neutral-100 hover:bg-neutral-200"
-                } transition-all duration-300 shadow-lg hover:shadow-xl`}
-              >
-                <Image
-                  src={`/${name}.svg`}
-                  alt={`${name} icon`}
-                  width={50}
-                  height={50}
-                  className="transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { TThem } from "../context/Context";
+import { motion, useInView } from "framer-motion";
 
 interface ProjectsCardProps {
   title: string;
@@ -12,13 +13,19 @@ interface ProjectsCardProps {
 
 const ProjectsCard = ({ title, desc, link, them }: ProjectsCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const isDark = them === "dark";
+
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "0px 0px -50px 0px" });
 
   return (
     <>
-      <button
+      <motion.button
+        ref={ref}
         onClick={() => setIsModalOpen(true)}
+        initial={{ opacity: 0, y: 50 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className="group block transition-all duration-300"
       >
         <div
@@ -82,12 +89,15 @@ const ProjectsCard = ({ title, desc, link, them }: ProjectsCardProps) => {
             </div>
           </div>
         </div>
-      </button>
+      </motion.button>
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed  inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div
+        <div className="fixed inset-0 z-[200] top-24 sm:top-20 flex items-center justify-center bg-black/50">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
             className={`relative w-full max-w-2xl rounded-xl p-8 shadow-2xl ${
               isDark ? "bg-gray-800" : "bg-white"
             }`}
@@ -125,7 +135,7 @@ const ProjectsCard = ({ title, desc, link, them }: ProjectsCardProps) => {
                 {title}
               </h2>
 
-              <div className="prose dark:prose-invert max-h-[500px] overflow-y-scroll sm:h-fit ">
+              <div className="prose dark:prose-invert max-h-[500px] overflow-y-scroll sm:h-fit">
                 <p className={isDark ? "text-gray-300" : "text-gray-600"}>
                   {desc}
                 </p>
@@ -156,7 +166,7 @@ const ProjectsCard = ({ title, desc, link, them }: ProjectsCardProps) => {
                 </Link>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
     </>

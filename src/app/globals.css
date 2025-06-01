@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-gradient: linear-gradient(to right, #4f46e5, #8b5cf6, #ec4899);
+  --secondary-gradient: linear-gradient(to right, #3b82f6, #8b5cf6);
+  --accent-gradient: linear-gradient(to right, #ec4899, #f97316);
+  --success-gradient: linear-gradient(to right, #10b981, #3b82f6);
+}
+
 ::-webkit-scrollbar {
   scroll-behavior: smooth;
 }
@@ -35,23 +42,88 @@
   transition:
     background-color 0.3s ease,
     color 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .dark {
-  @apply bg-neutral-900 text-white;
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1e293b;
+  --bg-card-hover: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --border-color: #334155;
+  --shadow-color: rgba(30, 64, 175, 0.25);
+  --glow-color: rgba(99, 102, 241, 0.15);
+
+  @apply bg-[var(--bg-primary)] text-[var(--text-primary)];
 }
 
 .light {
-  @apply bg-white text-neutral-900;
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --border-color: #e2e8f0;
+  --shadow-color: rgba(148, 163, 184, 0.2);
+  --glow-color: rgba(99, 102, 241, 0.1);
+
+  @apply bg-[var(--bg-primary)] text-[var(--text-primary)];
 }
 
 /* Dark mode specific styles */
 .dark .glow-text {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  text-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
 }
 
 /* Light mode specific styles */
 .light .glow-text {
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+}
+
+/* Common component styles */
+.section-title {
+  @apply text-4xl md:text-5xl font-bold text-center mb-12 relative;
+  background: var(--primary-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.card-base {
+  @apply rounded-xl p-6 transition-all duration-300 backdrop-blur-sm border;
+  background: rgba(var(--bg-card-rgb), 0.8);
+  border-color: var(--border-color);
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.card-base:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px var(--shadow-color);
+}
+
+.button-primary {
+  @apply px-6 py-2.5 rounded-xl font-medium transition-all duration-300;
+  background: var(--primary-gradient);
+  color: white;
+  box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.button-primary:active {
+  transform: translateY(1px);
+}
+
+.glass-effect {
+  @apply backdrop-blur-md border;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
 }
