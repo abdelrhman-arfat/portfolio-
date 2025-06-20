@@ -75,8 +75,9 @@ const HeroSection = ({ them }: { them: TThem }) => {
           >
             I am Abdelrhman Yasser,I am 18-year-old Computer and Information
             student at Tanta University with a strong passion for software
-            development. As a Junior MERN Stack Developer, I specialize in
-            building clean, scalable, and interactive web applications. I
+            development. As a Junior MERN Stack Developer,Php Laravel ,basics
+            python & fastapi , basic java with spring boot ,docker, I specialize
+            in building clean, scalable, and interactive web applications. I
             combine solid technical skills with a creative mindset to craft
             seamless digital experiences that solve real-world problems.
           </p>

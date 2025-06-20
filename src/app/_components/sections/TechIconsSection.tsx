@@ -6,17 +6,24 @@ import { TThem } from "../context/Context";
 
 const TechIconsSection = ({ them }: { them: TThem }) => {
   const technologies = [
-    "js",
     "nodejs",
+    "express",
+    "js",
     "ts",
     "react",
     "next",
+    "redis",
+    "php",
+    "laravel",
+    "python",
+    "fastapi",
+    "docker",
+    "aws",
     "redux",
     "tailwind",
-    "shadcn",
-    "express",
-    "mongodb",
     "Oauth",
+    "shadcn",
+    "mongodb",
     "mysql",
     "prisma",
     "stripe",
@@ -117,7 +124,7 @@ const TechIconsSection = ({ them }: { them: TThem }) => {
             {[...technologies, ...technologies].map((name, index) => (
               <motion.div
                 key={index}
-                className={`group flex-shrink-0 w-28 h-28 flex items-center justify-center rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl ${them === "dark" ? "bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)]" : "bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)]"}`}
+                className={`group flex-shrink-0 w-32 h-32 flex items-center justify-center rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl ${them === "dark" ? "bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)]" : "bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)]"}`}
                 variants={itemVariants}
                 whileHover={{
                   scale: 1.1,
@@ -130,8 +137,8 @@ const TechIconsSection = ({ them }: { them: TThem }) => {
                 <Image
                   src={`/${name}.svg`}
                   alt={`${name} icon`}
-                  width={60}
-                  height={60}
+                  width={50}
+                  height={50}
                   className="transition-transform duration-300 group-hover:scale-110"
                 />
               </motion.div>
