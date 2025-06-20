@@ -91,9 +91,10 @@ const AboutSection = ({ them }: { them: TThem }) => {
       >
         <div className="max-w-5xl mx-auto">
           <p className="text-xl leading-9 tracking-wide mb-10">
-            My name is AbdalRhman Yasser. I am 18 years old from Tanta, Egypt. I
-            am a junior MERN Stack developer with a strong passion for backend
-            development.
+            My name is Abdelrhman Yasser. I am 18 years old from Tanta, Egypt. I
+            am a self-taught software engineer passionate about building
+            efficient and scalable full-stack applications using modern
+            technologies.
           </p>
 
           <motion.div className="space-y-8" variants={cardVariants}>
@@ -106,11 +107,11 @@ const AboutSection = ({ them }: { them: TThem }) => {
                 Frontend Development
               </h2>
               <p className="text-lg leading-8 tracking-wide">
-                In frontend development, I use Next.js and React.js with
-                TypeScript for enhanced type security, Redux Toolkit for state
-                management, and Redux Toolkit Query for APIs. I also work with
-                Tailwind CSS for styling ,shadcn ui and have basic knowledge of Framer
-                motion for animations.
+                On the frontend, I work with React.js and Next.js using
+                TypeScript for strong typing. I manage state with Redux Toolkit,
+                RTK Query, and React Context. For styling, I use Tailwind CSS
+                and Shadcn UI. I optimize user experience with React hooks and
+                am familiar with tools like Framer Motion for animations.
               </p>
             </motion.div>
 
@@ -123,20 +124,27 @@ const AboutSection = ({ them }: { them: TThem }) => {
                 Backend Development
               </h2>
               <p className="text-lg leading-8 tracking-wide">
-                For backend development, I use Express with TypeScript to build
-                secure servers, MongoDB with Mongoose for NoSQL databases, and
-                MySQL for SQL databases with orm like prisma , know some about
-                nestjs and java with spring boot. Currently, I am learning Java
-                with Spring Boot to expand my backend development skills.
+                For backend, I build APIs Node.js with Express and TypeScript,
+                using Laravel (PHP),and FastAPI with Python. I use MySQL and
+                MongoDB databases, often with ORMs like Prisma and Mongoose. I’m
+                also expanding my knowledge in Java with Spring Boot and
+                implementing caching and optimization with Redis and load
+                balancers.
               </p>
             </motion.div>
 
-            <motion.p
-              className="text-xl leading-9 tracking-wide mt-6 text-center italic"
+            <motion.div
+              className={`p-6 rounded-2xl glass-effect ${them === "dark" ? "bg-purple-500/5" : "bg-purple-500/5"}`}
               variants={itemVariants}
+              whileHover={{ scale: 1.02, y: -5 }}
             >
-              I am a fast learner and always eager to take on new challenges.
-            </motion.p>
+              <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
+                Devops Basics
+              </h2>
+              <p className="text-lg leading-8 tracking-wide">
+                Docker and AWS basics. Git and testing
+              </p>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>
